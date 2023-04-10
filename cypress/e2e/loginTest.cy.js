@@ -15,12 +15,13 @@ describe('Login Module Tests', () => {
         loginpage.getPassword("password")
         loginpage.getSignInButton().click()
 
-        //Verufy that a success message is displayed
-        //cy.contains('Login successfull').should('be.visible')
 
         // Title and dashoboard verification
         cy.title().should("eq", "DokanE")
         loginpage.getDashboardText().should("contain.text", "Dashboard")
+
+        // Authenticated user verification
+        loginpage.getAuthUser().should("contain.text", "Super admin")
 
     })
 
@@ -43,6 +44,19 @@ describe('Login Module Tests', () => {
 
         // Verify that an invalid email error message is displayed
         cy.contains('Wrong password').should('be.visible')
+
+    })
+
+    it('Verify if user can logout successfully', () => { 
+
+        loginpage.getEmail("superadmin@reformedtech.org")
+        loginpage.getPassword("password")
+        loginpage.getSignInButton().click()
+
+        loginpage.getLogoutButton().click()
+
+        // Verify if user is back to the sign in page
+        cy.contains('Please sign in to your account').should('be.visible')
 
     })
 

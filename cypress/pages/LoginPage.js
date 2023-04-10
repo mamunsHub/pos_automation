@@ -17,6 +17,21 @@ class LoginPage {
         return cy.get('.text-blue-500')
     }
 
+    getAuthUser(){
+        cy.get('.profileButton').click()
+        return cy.get('#headlessui-menu-item-3')
+    }
+
+    getLogoutButton(){
+        cy.get('.profileButton').click()
+        return cy.get('#headlessui-menu-item-6')
+    }
+
+    getSigninPageText(){
+        
+        return cy.get('.mt-2')
+    }
+
   
 }
 
