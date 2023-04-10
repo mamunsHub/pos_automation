@@ -11,52 +11,80 @@ describe('Login Module Tests', () => {
 
     it('Verify that the user can login successfully into dashboard with valid email and password', () => {
 
-        loginpage.getEmail("superadmin@reformedtech.org")
-        loginpage.getPassword("password")
-        loginpage.getSignInButton().click()
+        cy.fixture('users.json').then((users) => {
 
+            const user = users[0]
 
-        // Title and dashoboard verification
-        cy.title().should("eq", "DokanE")
-        loginpage.getDashboardText().should("contain.text", "Dashboard")
+            loginpage.getEmail(user.email)
+            loginpage.getPassword(user.password)
+            loginpage.getSignInButton().click()
+    
+    
+            // Title and dashoboard verification
+            cy.title().should("eq", "DokanE")
+            loginpage.getDashboardText().should("contain.text", "Dashboard")
+    
+            // Authenticated user verification
+            loginpage.getAuthUser().should("contain.text", "Super admin")
 
-        // Authenticated user verification
-        loginpage.getAuthUser().should("contain.text", "Super admin")
+        })
 
     })
 
     it('Verify that the user cannot login with invalid email', () => {
 
-        loginpage.getEmail("invalidemail@reformedtech.org")
-        loginpage.getPassword("invalid password")
-        loginpage.getSignInButton().click()
+        cy.fixture('users.json').then((users) => {
 
-        // Verify that an invalid email error message is displayed
-        cy.contains('The selected email is invalid.').should('be.visible')
+            const user = users[1]
+
+            loginpage.getEmail(user.email)
+            loginpage.getPassword(user.password)
+            loginpage.getSignInButton().click()
+    
+            // Verify that an invalid email error message is displayed
+            cy.contains('The selected email is invalid.').should('be.visible')
+
+        })
+
+
 
     })
 
     it('Verify that the user cannot login with wrong password', () => {
 
-        loginpage.getEmail("superadmin@reformedtech.org")
-        loginpage.getPassword("invalid password")
-        loginpage.getSignInButton().click()
 
-        // Verify that an invalid email error message is displayed
-        cy.contains('Wrong password').should('be.visible')
+
+        cy.fixture('users.json').then((users) => {
+
+            const user = users[2]
+
+            loginpage.getEmail("superadmin@reformedtech.org")
+            loginpage.getPassword("invalid password")
+            loginpage.getSignInButton().click()
+    
+            // Verify that an invalid email error message is displayed
+            cy.contains('Wrong password').should('be.visible')
+
+        })
 
     })
 
     it('Verify if user can logout successfully', () => { 
 
-        loginpage.getEmail("superadmin@reformedtech.org")
-        loginpage.getPassword("password")
-        loginpage.getSignInButton().click()
+        cy.fixture('users.json').then((users) => {
 
-        loginpage.getLogoutButton().click()
+            const user = users[0]
 
-        // Verify if user is back to the sign in page
-        cy.contains('Please sign in to your account').should('be.visible')
+            loginpage.getEmail(user.email)
+            loginpage.getPassword(user.password)
+            loginpage.getSignInButton().click()
+    
+            loginpage.getLogoutButton().click()
+    
+            // Verify if user is back to the sign in page
+            cy.contains('Please sign in to your account').should('be.visible')
+
+        })
 
     })
 
