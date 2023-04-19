@@ -11,23 +11,16 @@ describe('Login Module Tests', () => {
 
     it('Verify that the user can login successfully into dashboard with valid email and password', () => {
 
-        cy.fixture('users.json').then((users) => {
-
-            const user = users[0]
-
-            loginpage.getEmail(user.email)
-            loginpage.getPassword(user.password)
-            loginpage.getSignInButton().click()
+        //Using cypress custom login command
+        cy.login()
     
     
-            // Title and dashoboard verification
-            cy.title().should("eq", "DokanE")
-            loginpage.getDashboardText().should("contain.text", "Dashboard")
-    
-            // Authenticated user verification
-            loginpage.getAuthUser().should("contain.text", "Super admin")
+        // Title and dashoboard verification
+        cy.title().should("eq", "DokanE")
+        loginpage.getDashboardText().should("contain.text", "Dashboard")
 
-        })
+        // Authenticated user verification
+        loginpage.getAuthUser().should("contain.text", "Super admin")
 
     })
 
