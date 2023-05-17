@@ -10,7 +10,7 @@ class LoginPage {
     }
 
     getSignInButton(){
-        return cy.get(':nth-child(5) > .w-full')
+        return cy.get("button[type='submit']")
     }
 
     getDashboardText(){
