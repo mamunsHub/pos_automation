@@ -56,9 +56,36 @@ Cypress test files are located in the `cypress/e2e` directory. You can create ne
 
 Cypress uses a BDD-style syntax with descriptive keywords like `describe` and `it` to structure and define your test cases. Refer to the [Cypress documentation](https://docs.cypress.io/guides/) for more information on writing Cypress tests.
 
-## Configuration
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The Cypress configuration can be customized by modifying the `cypress.json` file. You can specify various settings, such as the base URL, test file patterns, and more, to adapt Cypress to your project's requirements.
+ ## To run tests using Docker
+
+ 1. Install Docker
+ 2. Go to project root directory and run the following command to build Docker image
+
+ ```shell
+docker build -t <image name> .
+```
+
+ 3. Now, to sync it up with local directory, run the following command once
+
+ ```shell
+docker run -it -v $(pwd):/app <image name>
+```  
+
+or 
+
+ ```shell
+docker run -it -v "%cd%:/app" <image-name>
+```  
+
+4. Now to run the test using the docker image every time, run the follwoing command
+
+ ```shell
+docker run imagename:tagname 
+```  
+
 
 
 Happy testing! 🚀🔧
