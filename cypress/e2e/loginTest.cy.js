@@ -22,6 +22,9 @@ describe('Login Module Tests', () => {
         // Authenticated user verification
         loginpage.getAuthUser().should("contain.text", "Super admin")
 
+        // POP Up message displayed 
+        cy.contains('Login successful!').should('be.visible')
+
     })
 
     it('Verify that the user cannot login with invalid email', () => {
