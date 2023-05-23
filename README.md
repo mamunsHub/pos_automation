@@ -59,7 +59,7 @@ Cypress uses a BDD-style syntax with descriptive keywords like `describe` and `i
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
- ## To run tests using Docker
+ ## To run tests using Docker image
 
  1. Install Docker
  2. Go to project root directory and run the following command to build Docker image
@@ -84,6 +84,18 @@ docker run -it -v "%cd%:/app" <image-name>
 
  ```shell
 docker run imagename:tagname 
+```  
+
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ ## To run tests using docker compose file in multiple browsers
+
+ 1. Install docker
+ 2. Go to project directory and run the following comand to run tests
+
+ ```shell
+docker compose up
 ```  
 
 
