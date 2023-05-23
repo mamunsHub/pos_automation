@@ -54,8 +54,8 @@ describe('Login Module Tests', () => {
 
             const user = users[2]
 
-            loginpage.getEmail("superadmin@reformedtech.org")
-            loginpage.getPassword("invalid password")
+            loginpage.getEmail(user.email)
+            loginpage.getPassword(user.password)
             loginpage.getSignInButton().click()
     
             // Verify that an invalid email error message is displayed
