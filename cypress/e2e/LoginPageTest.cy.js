@@ -17,10 +17,10 @@ describe('Login Module Tests', () => {
     
         // Title and dashoboard verification
         cy.title().should("eq", "DokanE")
-        loginpage.getDashboardText().should("contain.text", "Dashboard")
+        loginpage.verifyDashboardText().should("contain.text", "Dashboard")
 
         // Authenticated user verification
-        loginpage.getAuthUser().should("contain.text", "Super admin")
+        loginpage.verifyAuthUser().should("contain.text", "Super admin")
 
         // POP Up message displayed 
         cy.contains('Login successful!').should('be.visible')
@@ -33,9 +33,9 @@ describe('Login Module Tests', () => {
 
             const user = users[1]
 
-            loginpage.getEmail(user.email)
-            loginpage.getPassword(user.password)
-            loginpage.getSignInButton().click()
+            loginpage.enterEmail(user.email)
+            loginpage.enterPassword(user.password)
+            loginpage.clickSignInButton()
     
             // Verify that an invalid email error message is displayed
             cy.contains('The selected email is invalid.').should('be.visible')
@@ -54,9 +54,9 @@ describe('Login Module Tests', () => {
 
             const user = users[2]
 
-            loginpage.getEmail(user.email)
-            loginpage.getPassword(user.password)
-            loginpage.getSignInButton().click()
+            loginpage.enterEmail(user.email)
+            loginpage.enterPassword(user.password)
+            loginpage.clickSignInButton()
     
             // Verify that an invalid email error message is displayed
             cy.contains('Wrong password').should('be.visible')
@@ -71,11 +71,11 @@ describe('Login Module Tests', () => {
 
             const user = users[0]
 
-            loginpage.getEmail(user.email)
-            loginpage.getPassword(user.password)
-            loginpage.getSignInButton().click()
+            loginpage.enterEmail(user.email)
+            loginpage.enterPassword(user.password)
+            loginpage.clickSignInButton()
     
-            loginpage.getLogoutButton().click()
+            loginpage.clickLogoutButton()
     
             // Verify if user is back to the sign in page
             cy.contains('Please sign in to your account').should('be.visible')

@@ -1,33 +1,33 @@
 class LoginPage {
 
-    getEmail(text){
+    enterEmail(text){
 
         return cy.get("input[placeholder='Your Email']").type(text)
     }
 
-    getPassword(text){
+    enterPassword(text){
         return cy.get("input[placeholder='Password']").type(text)
     }
 
-    getSignInButton(){
-        return cy.get("button[type='submit']")
+    clickSignInButton(){
+        return cy.get("button[type='submit']").click()
     }
 
-    getDashboardText(){
+    verifyDashboardText(){
         return cy.get('.text-blue-500')
     }
 
-    getAuthUser(){
+    verifyAuthUser(){
         cy.get('.profileButton').click()
         return cy.get('#headlessui-menu-item-3')
     }
 
-    getLogoutButton(){
+    clickLogoutButton(){
         cy.get('.profileButton').click()
-        return cy.get('#headlessui-menu-item-6')
+        return cy.get('#headlessui-menu-item-6').click()
     }
 
-    getSigninPageText(){
+    verifySigninPageText(){
         
         return cy.get('.mt-2')
     }
