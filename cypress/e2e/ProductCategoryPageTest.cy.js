@@ -15,13 +15,13 @@ describe('Category Page Tests', () => {
         cy.login()
 
         //Navigate to Categories page
-        categorypage.getCategory()
+        categorypage.navigateToCategory()
     
     
         // Title and Page verification
         cy.title().should("eq", "Categories")
-        categorypage.getCategoryText().should("contain.text", "Product Category")
-        categorypage.getCategoryHeaderText().should("contain.text", "Manage Your Products Categories")
+        categorypage.verifyCategoryText().should("contain.text", "Product Category")
+        categorypage.verifyCategoryHeaderText().should("contain.text", "Manage Your Products Categories")
 
     })
 
@@ -35,17 +35,18 @@ describe('Category Page Tests', () => {
             cy.login()
 
             //Navigate to Categories page
-            categorypage.getCategory()
+            categorypage.navigateToCategory()
             cy.wait(1000)
 
             // Click to add new product
-            categorypage.getAddCategoryButton()
+            categorypage.clickAddCategoryButton()
+            cy.wait(1000)
 
             //Fill up all the fields and submit
-            categorypage.getCategoryName(category.name)
-            categorypage.getCategoryCode(category.code)
-            categorypage.getCategoryDetails(category.details)
-            categorypage.getSubmitButton()
+            categorypage.enterCategoryName(category.name)
+            categorypage.enterCategoryCode(category.code)
+            categorypage.enterCategoryDetails(category.details)
+            categorypage.clickSubmitButton()
 
             // Verify that confirmation messge is displayed
             cy.contains('Category created successfully!').should('be.visible')            
@@ -69,11 +70,11 @@ describe('Category Page Tests', () => {
             cy.login()
 
             //Navigate to Categories page
-            categorypage.getCategory()
+            categorypage.navigateToCategory()
             cy.wait(1000)
 
             // Verify if category can be searched by its name
-            categorypage.getSearchField(categoryName)
+            categorypage.searchCategory(categoryName)
             cy.contains(categoryName).should('be.visible')
 
 
@@ -99,20 +100,20 @@ describe('Category Page Tests', () => {
             cy.login()
 
             //Navigate to Categories page
-            categorypage.getCategory()
+            categorypage.navigateToCategory()
             cy.wait(1000)
 
             // Search the category by its name
-            categorypage.getSearchField(categoryName)
+            categorypage.searchCategory(categoryName)
 
             // Update and verify
-            categorypage.getEditButton()
-            categorypage.getCategoryName(updateCategory.name)
-            categorypage.getCategoryCode(updateCategory.code)
-            categorypage.getCategoryDetails(updateCategory.details)
-            categorypage.getUpdateButton()
+            categorypage.editCategory()
+            categorypage.enterCategoryName(updateCategory.name)
+            categorypage.enterCategoryCode(updateCategory.code)
+            categorypage.enterCategoryDetails(updateCategory.details)
+            categorypage.clickUpdateButton()
 
-            categorypage.getSearchField(categoryName)
+            categorypage.searchCategory(categoryName)
             cy.contains(updateCategory.name).should('be.visible')
 
             // Verify that confirmation messge is displayed
@@ -136,12 +137,12 @@ describe('Category Page Tests', () => {
         cy.login()
 
         //Navigate to Categories page
-        categorypage.getCategory().click()
+        categorypage.navigateToCategory()
         cy.wait(1000)
 
         // Select and verify if 5 items are displayed now
-        categorypage.getShowItemsButton().select(0)
-        categorypage.getShowingCount().contains('1 ~ 5')
+        categorypage.clickShowItemsButton()
+        categorypage.verifyShowingCount().contains('1 ~ 5')
 
 
         
@@ -160,21 +161,21 @@ describe('Category Page Tests', () => {
         cy.login()
 
         //Navigate to Categories page
-       categorypage.getCategory().click()
+       categorypage.navigateToCategory()
        cy.wait(1000)
 
         // Select and verify if 5 items are displayed now
-        categorypage.getShowItemsButton().select(0)
-        categorypage.getShowingCount().contains('1 ~ 5')
+        categorypage.clickShowItemsButton()
+        categorypage.verifyShowingCount().contains('1 ~ 5')
 
        // Navigate to next page and verify the list
-       categorypage.getForwardPagination()
-       categorypage.getShowingCount().contains('6 ~ 10')
+       categorypage.clickForwardPagination()
+       categorypage.verifyShowingCount().contains('6 ~ 10')
 
 
        // Get back to previous page and verify the list
-       categorypage.getBackwardPagination()
-       categorypage.getShowingCount().contains('1 ~ 5')
+       categorypage.clickBackwardPagination()
+       categorypage.verifyShowingCount().contains('1 ~ 5')
 
         
     })

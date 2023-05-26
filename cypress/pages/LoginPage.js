@@ -2,15 +2,15 @@ class LoginPage {
 
     enterEmail(text){
 
-        return cy.get("input[placeholder='Your Email']").type(text)
+        cy.get("input[placeholder='Your Email']").type(text)
     }
 
     enterPassword(text){
-        return cy.get("input[placeholder='Password']").type(text)
+        cy.get("input[placeholder='Password']").type(text)
     }
 
     clickSignInButton(){
-        return cy.get("button[type='submit']").click()
+        cy.get("button[type='submit']").click()
     }
 
     verifyDashboardText(){
@@ -24,15 +24,9 @@ class LoginPage {
 
     clickLogoutButton(){
         cy.get('.profileButton').click()
-        return cy.get('#headlessui-menu-item-6').click()
+        cy.get('#headlessui-menu-item-6').click()
     }
 
-    verifySigninPageText(){
-        
-        return cy.get('.mt-2')
-    }
-
-  
 }
 
 module.exports = LoginPage
